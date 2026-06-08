@@ -10,10 +10,10 @@ pipeline {
     stages {
         stage('Execute Containerized Tests') {
             steps {
-                echo 'Spawning a clean Ubuntu environment, sanitizing line endings, and running tests...'
+                echo 'Spawning clean Ubuntu environment and running tests...'
                 
-                // The 'sed' command cleans up any accidental Windows \r characters before running bash
-                bat 'docker run --rm -v "%WORKSPACE%":/build -w /build ubuntu:24.04 bash -c "sed -i \"s/\\r//g\" ci-test.sh && bash ci-test.sh"'
+                // Back to the clean, simple command
+                bat 'docker run --rm -v "%WORKSPACE%":/build -w /build ubuntu:24.04 bash ./ci-test.sh'
             }
         }
     }
