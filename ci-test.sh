@@ -30,4 +30,10 @@ cd /build
 
 # The script MUST be executed from inside the test/ directory
 cd tests
-sh configure_test.sh
+sh configure_test.sh || {
+    echo "========================================================"
+    echo "   TEST FAILED! Dumping /build/configure_test.log       "
+    echo "========================================================"
+    cat ../configure_test.log
+    exit 1
+}
