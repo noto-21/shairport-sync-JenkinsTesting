@@ -30,7 +30,4 @@ cd /build
 
 # The script MUST be executed from inside the test/ directory
 cd tests
-chmod +x configure_test.sh
-
-# Run the gauntlet!
-./configure_test.sh
+sh configure_test.sh
