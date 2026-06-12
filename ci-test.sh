@@ -2,16 +2,16 @@
 set -e
 
 echo "=== 1. Installing System Dependencies ==="
-# Force Git inside the container to handle line endings for Linux
-git config --global core.autocrlf input
-
 apt-get update && apt-get install -y --no-install-recommends \
     build-essential autoconf automake libtool pkg-config git \
     ca-certificates \
     libmbedtls-dev libjack-dev libsndio-dev libao-dev \
     libpulse-dev libsndfile1-dev libavahi-compat-libdnssd-dev \
     libglib2.0-dev libmosquitto-dev libssl-dev libasound2-dev \
-    libpopt-dev libconfig-dev 
+    libpopt-dev libconfig-dev
+
+# Force Git inside the container to handle line endings for Linux
+git config --global core.autocrlf input
 
 echo "=== 2. Building custom ALAC library ==="
 git clone https://github.com/mikebrady/alac.git /tmp/alac
