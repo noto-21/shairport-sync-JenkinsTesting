@@ -26,7 +26,11 @@ ldconfig # Refresh the linker cache so Shairport can find libalac.so
 
 echo "=== 3. Running Brute-Force Tests ==="
 # Navigate back to your workspace root (adjust /build to your actual workspace path if needed)
-cd /build 
+cd /build
+
+# Strip hidden Windows carriage returns (\r) from the build script
+# This prevents the "required file not found" shebang crash
+sed -i 's/\r$//' verify-gitversion
 
 # The script MUST be executed from inside the test/ directory
 cd tests
