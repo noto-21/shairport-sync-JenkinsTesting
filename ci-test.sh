@@ -7,10 +7,11 @@ echo "=== 1. Installing System Dependencies ==="
 # obsolete for years and will immediately break apt-get on modern Debian/Ubuntu.
 apt-get update && apt-get install -y --no-install-recommends \
     build-essential autoconf automake libtool pkg-config git \
+    ca-certificates \
     libmbedtls-dev libjack-dev libsndio-dev libao-dev \
     libpulse-dev libsndfile1-dev libavahi-compat-libdnssd-dev \
     libglib2.0-dev libmosquitto-dev libssl-dev libasound2-dev \
-    libpopt-dev libconfig-dev 
+    libpopt-dev libconfig-dev
 
 echo "=== 2. Building custom ALAC library ==="
 # The test script strictly requires the ALAC library to be present.
