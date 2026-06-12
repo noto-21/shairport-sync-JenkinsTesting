@@ -23,20 +23,23 @@ make install
 ldconfig
 
 echo "=== 3. Running Brute-Force Tests ==="
-cd /build 
+# 1. Create a pristine, 100% native Linux directory inside the container
+mkdir -p /native-build
 
-# Safe Windows-to-Linux line sanitization using memory streams
-# This reads the file, strips '\r', and outputs it without breaking NTFS file locks
+# 2. Copy the entire repository into it. 
+# This completely detaches the code from the restricted Windows NTFS mount!
+cp -r /build/. /native-build
+cd /native-build
+
+# 3. Clean the line endings safely now that we are in a pure Linux environment
 cat verify-gitversion | tr -d '\r' > /tmp/verify-gitversion
 cat /tmp/verify-gitversion > verify-gitversion
 
-# The script MUST be executed from inside the tests/ directory
+# 4. Navigate to the tests directory and run the gauntlet
 cd tests
-
-# Run the test script. If it fails, dump the log file before exiting.
 sh configure_test.sh || {
     echo "========================================================"
-    echo "   TEST FAILED! Dumping /build/configure_test.log       "
+    echo "   TEST FAILED! Dumping configure_test.log              "
     echo "========================================================"
     cat ../configure_test.log
     exit 1
