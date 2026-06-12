@@ -26,7 +26,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up Windows host workspace...'
-            cleanWs()
+            cleanWs deleteDirs: true, notFailBuild: true
         }
     }
 }
