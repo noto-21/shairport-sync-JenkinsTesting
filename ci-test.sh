@@ -29,7 +29,7 @@ echo "=== 3. Running Brute-Force Tests ==="
 cd /build 
 
 # The script MUST be executed from inside the test/ directory
-cd test
+cd tests
 chmod +x configure_test.sh
 
 # Run the gauntlet!
