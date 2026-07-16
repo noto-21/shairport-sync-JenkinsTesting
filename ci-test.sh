@@ -32,11 +32,14 @@ python3 -m venv /venv
 echo "=== 6. Executing Application & Capturing Telemetry ==="
 LOG_PATH="/native-build/crash_telemetry.log"
 
-# Run the faulty binary directly. We expect a Segmentation Fault, so we disable set -e temporarily.
 set +e
-./shairport-sync > "$LOG_PATH" 2>&1
+# Run the binary inside a secondary bash instance so the shell's crash warning is captured in the redirect
+bash -c "./shairport-sync" > "$LOG_PATH" 2>&1
 EXIT_CODE=$?
 set -e
+
+# Explicitly inject the exit code into the log file so the AI has concrete data
+echo "System Exception: Process terminated with exit code $EXIT_CODE" >> "$LOG_PATH"
 
 echo "Application exited with code: $EXIT_CODE"
 echo "=== RAW TERMINAL OUTPUT ==="
