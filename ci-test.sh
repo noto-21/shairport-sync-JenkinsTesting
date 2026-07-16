@@ -48,3 +48,12 @@ echo "==========================="
 
 echo "=== 7. Invoking ESOps LLaMA Engine ==="
 /venv/bin/python /native-build/esops_analyzer.py "$LOG_PATH" "Shairport Sync (Linux User-Space)"
+
+# Semantically correct CI/CD behavior: Fail the pipeline if the app crashed
+if [ "$EXIT_CODE" -ne 0 ]; then
+    echo "Failing pipeline: Application terminated with exit code $EXIT_CODE"
+    exit "$EXIT_CODE"
+fi
+
+# If we reach here, it means EXIT_CODE was 0 (Success)
+exit 0
