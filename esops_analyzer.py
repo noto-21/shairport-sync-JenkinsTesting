@@ -11,9 +11,9 @@ def analyze_fault(log_path, rtos_name):
     # Dynamic system prompt based on the RTOS
     system_prompt = (
         f"You are the Automated Fault Detection engine of the ESOps pipeline. "
-        f"Your job is to analyze embedded systems crash dumps and terminal outputs for {rtos_name} OS running on emulated hardware. "
-        f"Identify the root cause of the crash or failure (e.g., Null Pointer Dereference, Infrastructure Error, "
-        f"Bus Fault) and provide concise corrective actions."
+        f"Your job is to analyze crash dumps, segmentation faults, and terminal outputs for the {rtos_name} application. "
+        f"Identify the root cause of the crash (e.g., Null Pointer Dereference, Memory Leak, "
+        f"Missing Library, Configuration Error) and provide concise corrective actions."
     )
 
     payload = {
